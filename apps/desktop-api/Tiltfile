@@ -1,0 +1,38 @@
+
+warn(
+    r"""
+-----------------------------------------------------------------
+   ___  __________ ____________  ___    ___   ___  ____
+  / _ \/ __/ __/ //_/_  __/ __ \/ _ \  / _ | / _ \/  _/
+ / // / _/_\ \/ ,<   / / / /_/ / ___/ / __ |/ ___// /
+/____/___/___/_/|_| /_/  \____/_/    /_/ |_/_/  /___/
+-----------------------------------------------------------------
+""".strip()
+)
+
+docker_build(
+    "bff-desktop-api",
+    context=".",
+    dockerfile="./Dockerfile",
+    only=["."],
+    live_update=[
+        sync("./desktop_api", "/src/apps/desktop-api/desktop_api"),
+    ],
+    target="dev",
+)
+
+k8s_yaml(
+    helm(
+        "./deploy",
+        name="bff-desktop-api",
+        values=["./deploy/values-dev.yaml"],
+    )
+)
+
+k8s_resource(
+    "bff-desktop-api",
+    labels=["api"],
+    port_forwards=[
+        port_forward(8001, 8001, name="bff-desktop-api"),
+    ],
+)

@@ -1,0 +1,12 @@
+dependencies:
+- name: legacy-api
+  repository: file://./../../legacy-api/deploy
+  version: 0.1.0
+- name: desktop-api
+  repository: file://./../../desktop-api/deploy
+  version: 0.1.0
+- name: mobile-api
+  repository: file://./../../mobile-api/deploy
+  version: 0.1.0
+digest: sha256:7ff0dcb9e7aa6255f8dfaab0665655db09cc30c492101e500452a28ceb5b8967
+generated: "2023-11-10T11:05:56.9762943-08:00"

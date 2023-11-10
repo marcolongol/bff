@@ -25,11 +25,14 @@ appVersion: '1.16.0'
 
 dependencies:
   - name: legacy-api
-    version: 1.0.0
-    repository: 'file://./charts/legacy-api'
+    version: 0.1.0
+    repository: 'file://./../../legacy-api/deploy'
+    condition: legacy-api.enabled
   - name: desktop-api
-    version: 1.0.0
-    repository: 'file://./charts/desktop-api'
+    version: 0.1.0
+    repository: 'file://./../../desktop-api/deploy'
+    condition: desktop-api.enabled
   - name: mobile-api
-    version: 1.0.0
-    repository: 'file://./charts/mobile-api'
+    version: 0.1.0
+    repository: 'file://./../../mobile-api/deploy'
+    condition: mobile-api.enabled

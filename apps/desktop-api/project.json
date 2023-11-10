@@ -27,7 +27,7 @@
       "executor": "@nxlv/python:build",
       "outputs": ["{projectRoot}/dist"],
       "options": {
-        "outputPath": "apps/desktop-api/dist",
+        "outputPath": "dist/apps/desktop-api",
         "publish": false,
         "lockedVersions": true,
         "bundleLocalDependencies": true

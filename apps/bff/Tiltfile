@@ -1,0 +1,34 @@
+print(
+    """
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+""".strip()
+)
+
+
+docker_build(
+    "bff-app",
+    context="../../",
+    dockerfile="./Dockerfile",
+    only=[".", "./../../tsconfig.base.json", "./../../nx.json", "./../../package.json"],
+    live_update=[
+        sync(".", "/src/apps/bff"),
+    ],
+    target="dev",
+)
+
+k8s_yaml(
+    helm(
+        "./deploy",
+        name="bff-app",
+        values=["./deploy/values-dev.yaml"],
+    )
+)
+
+k8s_resource(
+    "bff-app",
+    labels=["app"],
+    port_forwards=[
+        port_forward(4200, 4200, name="bff-app"),
+    ],
+)

@@ -1,0 +1,38 @@
+
+warn(
+    r"""
+-----------------------------------------------------------------
+   ___  __________ ____________  ___    ___   ___  ____
+  / _ \/ __/ __/ //_/_  __/ __ \/ _ \  / _ | / _ \/  _/
+ / // / _/_\ \/ ,<   / / / /_/ / ___/ / __ |/ ___// /
+/____/___/___/_/|_| /_/  \____/_/    /_/ |_/_/  /___/
+-----------------------------------------------------------------
+""".strip()
+)
+
+docker_build(
+    "bff-legacy-api",
+    context=".",
+    dockerfile="./Dockerfile",
+    only=["."],
+    live_update=[
+        sync("./legacy_api", "/src/apps/legacy-api/legacy_api"),
+    ],
+    target="dev",
+)
+
+k8s_yaml(
+    helm(
+        "./deploy",
+        name="bff-legacy-api",
+        values=["./deploy/values-dev.yaml"],
+    )
+)
+
+k8s_resource(
+    "bff-legacy-api",
+    labels=["api"],
+    port_forwards=[
+        port_forward(8000, 8000, name="bff-legacy-api"),
+    ],
+)
