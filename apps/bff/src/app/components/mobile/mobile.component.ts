@@ -1,15 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  standalone: true,
   selector: 'bff-mobile',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './mobile.component.html',
-  styleUrls: ['./mobile.component.css'],
+  styleUrls: ['./mobile.component.scss'],
 })
-export class MobileComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {
-    console.log('MobileComponent');
-  }
-}
+export class MobileComponent {}
