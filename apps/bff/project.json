@@ -21,7 +21,20 @@
         "scripts": []
       },
       "configurations": {
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        },
         "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "sourceMap": false,
+          "namedChunks": false,
+          "aot": true,
+          "vendorChunk": false,
+          "buildOptimizer": true,
+          "outputHashing": "all",
           "budgets": [
             {
               "type": "initial",
@@ -33,13 +46,7 @@
               "maximumWarning": "2kb",
               "maximumError": "4kb"
             }
-          ],
-          "outputHashing": "all"
-        },
-        "development": {
-          "optimization": false,
-          "extractLicenses": false,
-          "sourceMap": true
+          ]
         }
       },
       "defaultConfiguration": "production"
@@ -81,6 +88,24 @@
       "options": {
         "buildTarget": "bff:build",
         "staticFilePath": "dist/apps/bff/browser"
+      }
+    },
+    "container": {
+      "executor": "@nx-tools/nx-container:build",
+      "dependsOn": ["build"],
+      "options": {
+        "engine": "docker",
+        "metadata": {
+          "images": ["bff"],
+          "load": true,
+          "tags": [
+            "type=schedule",
+            "type=ref,event=branch",
+            "type=ref,event=tag",
+            "type=ref,event=pr",
+            "type=sha,prefix=sha-"
+          ]
+        }
       }
     }
   }

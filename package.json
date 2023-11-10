@@ -2,7 +2,9 @@
   "name": "@bff/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "serve:bff": "npx nx serve bff --host 0.0.0.0"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~17.0.0",
@@ -28,6 +30,8 @@
     "@angular/cli": "~17.0.0",
     "@angular/compiler-cli": "~17.0.0",
     "@angular/language-service": "~17.0.0",
+    "@nx-tools/container-metadata": "^5.1.0",
+    "@nx-tools/nx-container": "^5.1.0",
     "@nx/cypress": "17.1.1",
     "@nx/eslint": "17.1.1",
     "@nx/eslint-plugin": "17.1.1",

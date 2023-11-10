@@ -25,9 +25,7 @@
     },
     "build": {
       "executor": "@nxlv/python:build",
-      "outputs": [
-        "{projectRoot}/dist"
-      ],
+      "outputs": ["{projectRoot}/dist"],
       "options": {
         "outputPath": "apps/desktop-api/dist",
         "publish": false,
@@ -47,9 +45,7 @@
     },
     "lint": {
       "executor": "@nxlv/python:flake8",
-      "outputs": [
-        "{workspaceRoot}/reports/apps/desktop-api/pylint.txt"
-      ],
+      "outputs": ["{workspaceRoot}/reports/apps/desktop-api/pylint.txt"],
       "options": {
         "outputFile": "reports/apps/desktop-api/pylint.txt"
       }
@@ -63,6 +59,24 @@
       "options": {
         "command": "poetry run pytest tests/",
         "cwd": "apps/desktop-api"
+      }
+    },
+    "container": {
+      "executor": "@nx-tools/nx-container:build",
+      "dependsOn": ["build"],
+      "options": {
+        "engine": "docker",
+        "metadata": {
+          "images": ["desktop-api"],
+          "load": true,
+          "tags": [
+            "type=schedule",
+            "type=ref,event=branch",
+            "type=ref,event=tag",
+            "type=ref,event=pr",
+            "type=sha,prefix=sha-"
+          ]
+        }
       }
     }
   },

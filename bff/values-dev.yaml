@@ -8,7 +8,7 @@ image:
   repository: bff
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ''
+  tag: 'development'
 
 imagePullSecrets: []
 nameOverride: ''
@@ -43,7 +43,7 @@ securityContext:
 
 service:
   type: ClusterIP
-  port: 80
+  port: 4200
 
 ingress:
   enabled: false

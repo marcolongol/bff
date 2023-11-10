@@ -12,19 +12,14 @@
 #   multiline strings and common string operations such as formatting.
 #
 #   More info: https://docs.tilt.dev/api.html#api.warn
-print(
-    """
+print("""
 -----------------------------------------------------------------
 ✨ Hello Tilt! This appears in the (Tiltfile) pane whenever Tilt
    evaluates this file.
 -----------------------------------------------------------------
-""".strip()
-)
-warn(
-    "ℹ️ Open {tiltfile_path} in your favorite editor to get started.".format(
-        tiltfile_path=config.main_path
-    )
-)
+""".strip())
+warn('ℹ️ Open {tiltfile_path} in your favorite editor to get started.'.format(
+    tiltfile_path=config.main_path))
 
 
 # Build Docker image
@@ -50,17 +45,6 @@ warn(
 #              ]
 # )
 
-docker_build(
-    "bff",
-    context=".",
-    dockerfile="./apps/bff/Dockerfile",
-    only=["./apps/bff", "./tsconfig.base.json", "./nx.json", "./package.json"],
-    live_update=[
-        sync("./apps/bff", "/src/"),
-    ],
-    target="dev",
-)
-
 
 # Apply Kubernetes manifests
 #   Tilt will build & push any necessary images, re-deploying your
@@ -68,7 +52,8 @@ docker_build(
 #
 #   More info: https://docs.tilt.dev/api.html#api.k8s_yaml
 #
-k8s_yaml(helm("bff", name="bff", values=["./bff/values-dev.yaml"]))
+# k8s_yaml(['k8s/deployment.yaml', 'k8s/service.yaml'])
+
 
 # Customize a Kubernetes resource
 #   By default, Kubernetes resource names are automatically assigned
@@ -88,13 +73,6 @@ k8s_yaml(helm("bff", name="bff", values=["./bff/values-dev.yaml"]))
 #              # control whether the resource automatically updates
 #              trigger_mode=TRIGGER_MODE_MANUAL
 # )
-k8s_resource(
-    "bff",
-    labels=["app"],
-    port_forwards=[
-        port_forward(4200, 4200, name="bff-app"),
-    ],
-)
 
 
 # Run local commands
@@ -114,3 +92,38 @@ k8s_resource(
 #                    '& {if (!(Get-Command helm -ErrorAction SilentlyContinue)) {scoop install helm}}'
 #                ]
 # )
+
+
+# Extensions are open-source, pre-packaged functions that extend Tilt
+#
+#   More info: https://github.com/tilt-dev/tilt-extensions
+#
+load('ext://git_resource', 'git_checkout')
+
+
+# Organize logic into functions
+#   Tiltfiles are written in Starlark, a Python-inspired language, so
+#   you can use functions, conditionals, loops, and more.
+#
+#   More info: https://docs.tilt.dev/tiltfile_concepts.html
+#
+def tilt_demo():
+    # Tilt provides many useful portable built-ins
+    # https://docs.tilt.dev/api.html#modules.os.path.exists
+    if os.path.exists('tilt-avatars/Tiltfile'):
+        # It's possible to load other Tiltfiles to further organize
+        # your logic in large projects
+        # https://docs.tilt.dev/multiple_repos.html
+        load_dynamic('tilt-avatars/Tiltfile')
+    watch_file('tilt-avatars/Tiltfile')
+    git_checkout('https://github.com/tilt-dev/tilt-avatars.git',
+                 checkout_dir='tilt-avatars')
+
+
+# Edit your Tiltfile without restarting Tilt
+#   While running `tilt up`, Tilt watches the Tiltfile on disk and
+#   automatically re-evaluates it on change.
+#
+#   To see it in action, try uncommenting the following line with
+#   Tilt running.
+# tilt_demo()

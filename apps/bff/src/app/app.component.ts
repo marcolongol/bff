@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { DeviceDetectorService } from './services/device-detector.service';
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent, RouterModule],
+  imports: [RouterModule],
+  providers: [DeviceDetectorService],
   selector: 'bff-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  title = 'bff';
-}
+export class AppComponent {}
