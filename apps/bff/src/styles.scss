@@ -1,1 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@fontsource-variable/saira/scss/mixins' as Saira;
+
+// SECTION: IMPORTS
+@import './assets/scss/variables';
+@import 'bootstrap/scss/bootstrap';
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/solid';
+@import '@fortawesome/fontawesome-free/scss/regular';
+@import '@fortawesome/fontawesome-free/scss/brands';
+
+// SECTION: FONTS
+@include Saira.faces(
+  $subsets: 'latin',
+  $weights: (
+    300,
+    500,
+    700,
+  ),
+  $styles: normal,
+  $directory: '@fontsource-variable/saira/files'
+);
+
+// SECTION: GLOBALS
+body {
+  font-family: $font-family-base;
+  font-weight: 300;
+}

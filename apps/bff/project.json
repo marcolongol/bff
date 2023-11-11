@@ -18,7 +18,7 @@
         "inlineStyleLanguage": "scss",
         "assets": ["apps/bff/src/favicon.ico", "apps/bff/src/assets"],
         "styles": ["apps/bff/src/styles.scss"],
-        "scripts": []
+        "scripts": ["node_modules/bootstrap/dist/js/bootstrap.min.js"]
       },
       "configurations": {
         "development": {
