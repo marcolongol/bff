@@ -23,4 +23,11 @@ export const appRoutes: Route[] = [
       ),
     canActivate: [deviceGuard],
   },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./components/not-found/not-found.component').then(
+        (m) => m.NotFoundComponent
+      ),
+  },
 ];
