@@ -10,7 +10,7 @@
       "executor": "@nx/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/bff",
+        "outputPath": "dist/apps/bff/browser",
         "customWebpackConfig": {
           "path": "apps/bff/webpack.config.ts"
         },
@@ -114,6 +114,67 @@
           ]
         }
       }
+    },
+    "server": {
+      "dependsOn": ["build"],
+      "executor": "@angular-devkit/build-angular:server",
+      "options": {
+        "outputPath": "dist/apps/bff/server",
+        "main": "apps/bff/server.ts",
+        "tsConfig": "apps/bff/tsconfig.server.json",
+        "inlineStyleLanguage": "scss"
+      },
+      "configurations": {
+        "development": {
+          "optimization": false,
+          "sourceMap": true,
+          "extractLicenses": false
+        },
+        "production": {
+          "outputHashing": "media",
+          "fileReplacements": [
+            {
+              "replace": "apps/bff/src/environments/environment.ts",
+              "with": "apps/bff/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "sourceMap": false,
+          "extractLicenses": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve-ssr": {
+      "executor": "@angular-devkit/build-angular:ssr-dev-server",
+      "configurations": {
+        "development": {
+          "browserTarget": "bff:build:development",
+          "serverTarget": "bff:server:development"
+        },
+        "production": {
+          "browserTarget": "bff:build:production",
+          "serverTarget": "bff:server:production"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "prerender": {
+      "executor": "@angular-devkit/build-angular:prerender",
+      "options": {
+        "routes": ["/"]
+      },
+      "configurations": {
+        "development": {
+          "browserTarget": "bff:build:development",
+          "serverTarget": "bff:server:development"
+        },
+        "production": {
+          "browserTarget": "bff:build:production",
+          "serverTarget": "bff:server:production"
+        }
+      },
+      "defaultConfiguration": "production"
     }
   }
 }

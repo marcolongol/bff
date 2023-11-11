@@ -6,9 +6,9 @@ RUN npm install
 COPY ./nx.json .
 COPY ./tsconfig.base.json .
 COPY ./apps/bff ./apps/bff
-CMD ["npm", "run", "serve:bff"]
+CMD ["npm", "run", "ssr-serve:bff"]
 
 FROM nginx:alpine as prod
 EXPOSE 80
-COPY  ./dist/apps/bff /usr/share/nginx/html
+COPY  ./dist/apps/bff/browser /usr/share/nginx/html
 CMD ["nginx", "-g", "daemon off;"]
