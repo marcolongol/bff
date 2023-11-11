@@ -7,12 +7,15 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:application",
+      "executor": "@nx/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/bff",
+        "customWebpackConfig": {
+          "path": "apps/bff/webpack.config.ts"
+        },
+        "main": "apps/bff/src/main.ts",
         "index": "apps/bff/src/index.html",
-        "browser": "apps/bff/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/bff/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
@@ -32,8 +35,6 @@
           "sourceMap": false,
           "namedChunks": false,
           "aot": true,
-          "vendorChunk": false,
-          "buildOptimizer": true,
           "outputHashing": "all",
           "budgets": [
             {
@@ -46,13 +47,19 @@
               "maximumWarning": "2kb",
               "maximumError": "4kb"
             }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/bff/src/environments/environment.ts",
+              "with": "apps/bff/src/environments/environment.prod.ts"
+            }
           ]
         }
       },
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
+      "executor": "@nx/angular:webpack-dev-server",
       "configurations": {
         "production": {
           "buildTarget": "bff:build:production"

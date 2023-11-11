@@ -36,4 +36,5 @@ k8s_resource(
     port_forwards=[
         port_forward(4200, 4200, name="bff-app"),
     ],
+    trigger_mode=TRIGGER_MODE_MANUAL,
 )
