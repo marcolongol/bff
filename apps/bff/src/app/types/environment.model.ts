@@ -1,4 +1,4 @@
-import { DeepReadonly } from './utils';
+import { DeepReadonly } from '../utils/utils';
 
 export interface Environment {
   production: boolean;

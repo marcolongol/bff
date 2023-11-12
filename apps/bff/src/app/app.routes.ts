@@ -26,7 +26,7 @@ export const appRoutes: Route[] = [
   {
     path: '**',
     loadComponent: () =>
-      import('./components/not-found/not-found.component').then(
+      import('./components/notfound/notfound.component').then(
         (m) => m.NotFoundComponent
       ),
   },

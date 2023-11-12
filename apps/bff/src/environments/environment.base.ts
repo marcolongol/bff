@@ -1,4 +1,4 @@
-import { ReadonlyEnvironment } from '../app/models/environment.model';
+import { ReadonlyEnvironment } from '../app/types/environment.model';
 
 export const BASE_ENVIRONMENT: ReadonlyEnvironment = {
   production: false,
