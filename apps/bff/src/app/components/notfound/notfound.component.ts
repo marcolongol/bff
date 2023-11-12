@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
   selector: 'bff-not-found',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './not-found.component.html',
-  styleUrls: ['./not-found.component.scss'],
+  templateUrl: './notfound.component.html',
+  styleUrls: ['./notfound.component.scss'],
 })
 export class NotFoundComponent {}
