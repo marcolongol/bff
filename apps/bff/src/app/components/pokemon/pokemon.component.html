@@ -1,0 +1,16 @@
+<div
+  class="pokemon"
+  [ngStyle]="{
+    'background-color': device === 'Mobile' ? 'lightblue' : 'lightgreen',
+  }"
+>
+  <h1 class="title">{{ device }} App</h1>
+
+  <ng-container *ngIf="pokemon$ | async as pokemon">
+    <bff-pokemon-card [pokemon]="pokemon"></bff-pokemon-card>
+  </ng-container>
+
+  <button type="button" class="btn btn-primary btn-lg" (click)="getPokemon()">
+    Get a Pokemon
+  </button>
+</div>

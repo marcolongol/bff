@@ -1,0 +1,26 @@
+.pokemon-card {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin: 2rem 0;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  .pokemon-card__image {
+    max-height: 60%;
+  }
+
+  .pokemon-card__name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+
+  .pokemon-card__types {
+    .pokemon-card__type {
+      border-radius: 5px;
+      text-transform: capitalize;
+    }
+  }
+}

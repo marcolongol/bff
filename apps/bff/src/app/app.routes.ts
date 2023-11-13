@@ -10,18 +10,24 @@ export const appRoutes: Route[] = [
   {
     path: 'mobile',
     loadComponent: () =>
-      import('./components/mobile/mobile.component').then(
-        (m) => m.MobileComponent
+      import('./components/pokemon/pokemon.component').then(
+        (m) => m.PokemonComponent
       ),
     canActivate: [deviceGuard],
+    data: {
+      device: 'Mobile',
+    },
   },
   {
     path: 'desktop',
     loadComponent: () =>
-      import('./components/desktop/desktop.component').then(
-        (m) => m.DesktopComponent
+      import('./components/pokemon/pokemon.component').then(
+        (m) => m.PokemonComponent
       ),
     canActivate: [deviceGuard],
+    data: {
+      device: 'Desktop',
+    },
   },
   {
     path: '**',
