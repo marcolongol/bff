@@ -39,6 +39,10 @@ def read_pokemon(pokemon_id: Union[int, str]):
     """
     Pokemon endpoint
     """
-    url = f"{LEGACY_API_URL}/pokemon/{pokemon_id}"
-    response = requests.get(url)
-    return response.json()
+    try:
+        url = f"{LEGACY_API_URL}/pokemon/{pokemon_id}"
+        response = requests.get(url)
+        return response.json()
+    except Exception as e:
+        print(e)
+        return {"error": "Something went wrong"}
