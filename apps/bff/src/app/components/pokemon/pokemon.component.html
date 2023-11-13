@@ -10,6 +10,13 @@
     <bff-pokemon-card [pokemon]="pokemon"></bff-pokemon-card>
   </ng-container>
 
+  <input
+    type="text"
+    [(ngModel)]="pokemonId"
+    class="form-control pokemon-id-input"
+    *ngIf="device === 'Mobile'"
+  />
+
   <button type="button" class="btn btn-primary btn-lg" (click)="getPokemon()">
     Get a Pokemon
   </button>
