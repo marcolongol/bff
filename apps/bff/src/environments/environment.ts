@@ -6,9 +6,9 @@ export const environment: ReadonlyEnvironment = {
   env: {
     ...BASE_ENVIRONMENT.env,
     BFF_DESKTOP_API_PORT:
-      'e290-2607-fb91-15ab-4fd8-7dda-1b2-a936-e6d.ngrok-free.app',
+      '3255-2607-fb91-15ab-4fd8-b8ea-3cb5-7203-393e.ngrok-free.app',
     BFF_MOBILE_API_PORT:
-      '123c-2607-fb91-15ab-4fd8-7dda-1b2-a936-e6d.ngrok-free.app',
+      '2edf-2607-fb91-15ab-4fd8-b8ea-3cb5-7203-393e.ngrok-free.app',
   },
   production: false,
 };
